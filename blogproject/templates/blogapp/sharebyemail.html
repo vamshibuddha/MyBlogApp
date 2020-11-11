@@ -3,10 +3,10 @@
 {%block title_block%}Share post by email{%endblock%}
     {%block content%}
     {%if sent%}
-        <h1>Email Successfully sent!!!</h1>
-        <h2>Post with title {{post.title}} information shared by email</h2>
+        <h2>Email Successfully sent!!!</h2>
+        <h5>Post with title {{post.title}} information shared by email</h5>
     {%else%}
-        <h1>Share Post with title "{{post.title}}" By Email</h1>
+        <h2>Share Post with title "{{post.title}}" By Email</h2>
         <form method="post">
             {{form.as_p}}
             {%csrf_token%}

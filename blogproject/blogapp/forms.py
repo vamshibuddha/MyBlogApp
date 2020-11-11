@@ -7,6 +7,7 @@ class EmailSendForm(forms.Form):
     to = forms.EmailField()
     comments = forms.CharField(required=False, widget=forms.Textarea)
 
+
 from blogapp.models import Comment
 
 

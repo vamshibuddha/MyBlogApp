@@ -11,7 +11,7 @@ def post_list_view(request, tag_slug=None):
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         post_list = post_list.filter(tags__in=[tag])
-    paginator = Paginator(post_list, 2)
+    paginator = Paginator(post_list, 3)
     page_number = request.GET.get('page')
     try:
         post_list = paginator.page(page_number)
@@ -32,7 +32,8 @@ from blogapp.forms import CommentForm
 
 
 def post_detail_view(request, year, month, day, post):
-    post = get_object_or_404(Post, slug=post, status='published',
+    post = get_object_or_404(Post, slug=post,
+                             status='published',
                              publish__year=year,
                              publish__month=month,
                              publish__day=day)
@@ -62,7 +63,10 @@ def mail_send_view(request, id):
         form = EmailSendForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            send_mail('subject', 'message', 'durga@blog.com', [cd['to']])
+            post_url = request.build_absolute_uri(post.get_absolute_url())
+            subject = '{}({}) recommends you to read "{}"'.format(cd['name'], cd['email'], post.title)
+            message = 'Read Post At: \n {}\n\n{}\'s Comments:\n{}'.format(post_url, cd['name'], cd['comments'])
+            send_mail(subject, message, 'vamshibuddha@blog.com', [cd['to']])
             sent = True
     else:
         form = EmailSendForm()

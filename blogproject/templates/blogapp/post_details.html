@@ -20,9 +20,9 @@
             <p>There are no comments yet!</p>
         {%endif%}
         {%if csubmit %}
-            <h2>Your comment added successfully</h2>
+            <h3>Your comment added successfully</h3>
         {%else%}
-            <h2>You can submit your comments here.</h2>
+            <h3>You can submit your comments here.</h3>
             <form method="POST">
             {{form.as_p}}
                 {%csrf_token%}

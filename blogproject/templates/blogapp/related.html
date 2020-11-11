@@ -1,41 +1,22 @@
 <!DOCTYPE html>
-{%load blogapp_tags%}
-{%load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{%block title_block%}{%endblock%}</title>
+    <title>related</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static "css/blogstyle.css" %}">
 </head>
 <body>
-<div class="navbar">
-        <a href="/" class="logo">Buddha's Blog</a>
-        <a href="#about">About</a>
-</div>
-<div class="row">
-<div class="content">
-    {%block content%}
-    {%endblock%}
-</div>
-<div class="sidebar">
-    <h2>RELATED</h2>
+<h2>RELATED</h2>
     <p>The total number of published posts till today: <span id="pcount">{%my_tag%}</span></p>
-    <h3>Latest Posts: </h3>
-    {% show_latest_posts %}
+    <h3>Latest Posts: </h3>{% show_latest_posts %}
     <h3>Most commented Posts:</h3>
     {% get_most_commented_posts as most_commented_posts %}
     <ul>
         {%for post in most_commented_posts%}
-        <li class="list"><a class="one" href="{{post.get_absolute_url}}">{{post.title}}</a></li>
+        <li><a href="{{post.get_absolute_url}}">{{post.title}}</a></li>
         {%endfor%}
     </ul>
-</div>
-    </div>
-<div class="footer">
-    <p>Privacy Policy
-© 2020 Copyright Vamshi Buddha</p>
-</div>
 </body>
 </html>
